@@ -2,9 +2,15 @@
 
 var http=require('http');
 var express = require('express')
+var config = require('./config')
 var app=express()
-var server = http.createServer(app).listen(8000,'0.0.0.0');
-console.log("server running");
+
+
+var server = app.listen(config.port,function() {
+                 
+  console.log("Server is up and listening...")
+});
+
 
 app.use("/",function(req,res){
   res.write("hello");
