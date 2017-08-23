@@ -8,6 +8,10 @@ router.get("/", function(req, res, err) {
   res.render("index.html")
 });
 
+router.post('/login',function(req,res,err){
+  
+});
+
 router.get("/user",function(req,res,err)
 {
    console.log("called /user using GET")

@@ -1,8 +1,41 @@
 <html>
   <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <link rel="stylesheet" href="../css/styles.css">
   </head>
-  <body>
-    Welcome to Index Page !!<br/>
-    <a href="./user">User page</a>
+  <body ng-app="agile">
+    <div class="container-fluid">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/">AGILE</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><a href="#">Home</a></li>
+            <li class="active"><a href="#">Signin</a></li>
+            <li><a href="#">Signup</a></li>
+          </ul>
+        </div>
+       </nav>
+       <div class="row panel panel-default" ng-controller="loginCntrl">
+
+           <div class="panel-heading"><center><b>SIGN IN</b></center></div>
+           <div class="panel-body login-tab">
+
+               <form method="post" ng-submit="login(username,password)">
+                 <div class="form-group"><input type="text" placeholder="Username..." ng-model="username" value="" class="form-control uname" size="15"></div>
+                 <div class="form-group"><input type="password" placeholder="Password..." ng-model="password" value="" class="form-control pass" size="15"></div>
+                 <button  type="submit" class="btn btn-primary btn-block"><b>Login</b></button>
+               </form>
+           </div>
+
+
+
+      </div>
+
+    </div>
   </body>
 </html>
