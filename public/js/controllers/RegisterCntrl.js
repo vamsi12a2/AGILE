@@ -1,4 +1,4 @@
-app.module("agile").controller("RegisterCntrl",['$scope','$http','Auth','$location',function($http,Auth,$scope,$location){
+angular.module("agile").controller("RegisterCntrl",['$scope','$http','Auth','$location',function($http,Auth,$scope,$location){
 	
 	$scope.register = function(username,password){
 	Auth.register(username,password).then(

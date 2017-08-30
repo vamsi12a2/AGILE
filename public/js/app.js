@@ -1,2 +1,2 @@
-var app= angular.module("agile",['LoginCntrl','RegisterCntrl']);
-
+angular.module("agile",[]);
+console.log('app initiated')

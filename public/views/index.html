@@ -1,9 +1,14 @@
+<!DOCTYPE html>
 <html>
   <head>
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/controllers/LoginCntrl.js"></script>
+    <script src="../js/controllers/RegisterCntrl.js"></script>
+    <script src="../js/services/AuthSrvc.js"></script>
     <link rel="stylesheet" href="../css/styles.css">
   </head>
   <body ng-app="agile">
@@ -20,21 +25,17 @@
           </ul>
         </div>
        </nav>
-       <div class="row panel panel-default" ng-controller="loginCntrl">
-
-           <div class="panel-heading"><center><b>SIGN IN</b></center></div>
+       <div class="row panel panel-default" ng-controller="LoginCntrl">
+            
+           <div class="panel-heading"><center><b>{{title}}</b></center></div>
            <div class="panel-body login-tab">
-
-               <form method="post" ng-submit="login(username,password)">
+               <form  novalidate method="post" ng-submit="login(username,password)">
                  <div class="form-group"><input type="text" placeholder="Username..." ng-model="username" value="" class="form-control uname" size="15"></div>
                  <div class="form-group"><input type="password" placeholder="Password..." ng-model="password" value="" class="form-control pass" size="15"></div>
-                 <button  type="submit" class="btn btn-primary btn-block"><b>Login</b></button>
+                 <input  type="submit" class="btn btn-primary btn-block" value="Login">
                </form>
            </div>
-
-
-
-      </div>
+     </div>
 
     </div>
   </body>

@@ -4,22 +4,21 @@ service("Auth",function($http)
 	 var srv=this;
 	 srv.login = function(username,password)
 	 {
-		 $http({
-			 url:"/login",
-			 method:"POST",
-			 data: { username:username,password:password}
-		 }).then(function(res){
-			 return res.data;
-		 })
+		
+		return	 $http({
+				 url:"/login",
+				 method:"POST",
+				 data: { username:username,password:password}
+		 	})
+		 
 	 }
 	 srv.register = function(username,password)
 	 {
-		 $http({
+		 return $http({
 			 url:"/register",
 			 method:"POST",
 			 data: { username:username,password:password}
-		 }).then(function(res){
-			 return res.data;
 		 })
 	 }
+	 return srv;
 })
