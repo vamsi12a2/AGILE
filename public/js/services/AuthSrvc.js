@@ -1,5 +1,5 @@
 angular.module("agile").
-service("Auth",function($http)
+service("Auth",['$http',function($http)
 {
 	 var srv=this;
 	 srv.login = function(username,password)
@@ -21,4 +21,4 @@ service("Auth",function($http)
 		 })
 	 }
 	 return srv;
-})
+}])

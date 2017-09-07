@@ -1,2 +1,2 @@
-angular.module("agile",[]);
+angular.module("agile",['ngRoute']);
 console.log('app initiated')

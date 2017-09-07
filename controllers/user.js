@@ -12,7 +12,7 @@ router.get("/", function(req, res, err) {
 router.post('/login', function(req, res, err) {
 
  console.log('login success')
- res.redirect("/user")
+ res.json("true");
 
 });
 

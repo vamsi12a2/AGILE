@@ -1,10 +1,13 @@
-angular.module("agile").controller("LoginCntrl",['$scope','$http','Auth','$location',function($scope,$http,Auth,$location){
+angular.module("agile").controller("LoginCntrl",['$scope','$http','Auth','$location','$window',function($scope,$http,Auth,$location,$window){
 	
 	
 	$scope.title ="Signin";
 	$scope.login = function(username,password){
 	Auth.login(username,password).then(function(res){
-				console.log(res.data)	
+				if(res.data === "true")
+				{
+					$window.location.href("/user")
+				}
 		})
 	}
 		
