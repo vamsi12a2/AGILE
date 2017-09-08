@@ -1,6 +1,6 @@
 module.exports={
 
-  port : "8885",
+  port : "8002",
 
   host : "0.0.0.0",
 

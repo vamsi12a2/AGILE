@@ -6,8 +6,12 @@ angular.module("agile").controller("LoginCntrl",['$scope','$http','Auth','$locat
 	Auth.login(username,password).then(function(res){
 				if(res.data === "true")
 				{
-					$window.location.href("/user")
+				$location.path("/user")
 				}
+		},
+		function(res)
+		{
+			$location.path("/error")
 		})
 	}
 		

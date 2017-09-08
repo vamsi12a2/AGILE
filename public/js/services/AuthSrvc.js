@@ -17,7 +17,7 @@ service("Auth",['$http',function($http)
 		 return $http({
 			 url:"/register",
 			 method:"POST",
-			 data: { username:username,password:password}
+			 data: {username:username,password:password}
 		 })
 	 }
 	 return srv;
