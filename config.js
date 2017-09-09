@@ -5,6 +5,8 @@ module.exports={
   host : "0.0.0.0",
 
   key  : "vamsi" ,
-  
-  MONGO_URL : "mongodb://localhost/social"
+
+  MONGO_URL : "mongodb://localhost/social",
+
+  secret    : "krishna"
 }

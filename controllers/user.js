@@ -1,57 +1,80 @@
 var express = require('express')
 var router = express.Router()
-var bcrypt = require('bcrypt')
+var bcrypt = require('bcrypt-nodejs')
 var path = require('path')
+var jwt = require('jwt-simple')
 var Login = require('../models/Login')
+var config = require('../config')
+
 router.get("/", function(req, res, err) {
   console.log("called / using GET")
-
-  res.render("index.html")
+  return res.render("index.html")
 });
 
-router.post('/login', function(req, res, err) {
+router.post("/session",function(req,res,err){
+    console.log("called /session using POST")
+    var username = req.body.username
+    var password = req.body.password
+    Login.findOne({username:username}).select('password').
+    exec(function(err,user){
+      if(err){
+        console.log(err)
+        return next(err)
+      }
+      if(!user){
+        console.log("user not found")
+        return res.sendStatus(401)
+      }
+      bycrpt.compare(password,user.password,function(err,valid){
+        if(err){
+          console.log(err)
+          return next(err)
+        }
+        if(!valid){
+          console.log("password incorrect")
+          return res.sendStatus(401);
+        }
+        var token = jwt.encode({username:user.username},config.secret)
+        console.log("authenication success..")
+        return res.json(token)
+      })
+    })
+})
 
-  console.log('login success')
-  res.json("true");
-
-});
 
 
-router.get('/login', function(req, res, err) {
+router.get('/user',function(req,res,err){
 
-  console.log('login page loaded')
-  res.render("login.html")
-
-});
-
-router.get('/register', function(req, res, err) {
-
-  console.log('register page loaded')
-  res.render("register.html")
-});
-
-router.post('/register', function(req, res, err) {
- console.log("username:"+req.body.username)
- var pass =""
- bcrypt.hash(req.body.password,12,function(err,hash){
+  if(!req.headers['x-auth']){
+    console.log("invalid user")
+    return res.sendStatus(401)
+  }
+  var user = jwt.decode(req.headers['x-auth'],config.secret)
+  Login.findOne({username:user.username}).exec(function(err,user){
     if(err){
       console.log(err)
+      return next(err)
     }
-  console.log("password:"+pass)
-  var user=new Login({username:req.body.username,password:pass})
+    if(!user){
+      console.log("user not found")
+      return res.sendStatus(401)
+    }
+    console.log("login success..")
+    return res.json(user.username)
+  })
+})
+
+
+router.post('/user',function(req,res,err){
+
+  var user = new Login({username:req.body.username,password:req.body.password})
   user.save(function(err){
-    console.log("save")
     if(err){
-       return next(err)
-     }
-  res.json({status:"true",user:user.username})
+      console.log(err)
+      return next(err)
+    }
   })
-  })
-});
-
-router.get("/user", function(req, res, err) {
-  console.log("called /user using GET")
-  res.render("user.html")
-});
-
+  console.log("registration success..")
+  return res.sendStatus(201)
+})
 module.exports = router
