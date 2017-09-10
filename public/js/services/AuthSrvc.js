@@ -5,7 +5,7 @@ service("Auth",['$http',function($http)
 	 srv.login = function(username,password)
 	 {
 
-		 $http({
+		 return $http({
 				 url:"/session",
 				 method:"POST",
 				 data: { username:username,password:password}
@@ -25,13 +25,10 @@ service("Auth",['$http',function($http)
 	 }
 	 srv.register = function(username,password)
 	 {
-			$http({
+			return $http({
 			 url:"/user",
 			 method:"POST",
 			 data: {username:username,password:password}
-		 }).then(function(res){
-
-			  srv.login(username,password);
 		 })
 	 }
 	 return srv;
