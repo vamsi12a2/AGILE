@@ -91,4 +91,27 @@ router.post('/user',function(req,res,err){
     })
 
 })
+
+
+router.get("/getData",function(req,res,err){
+
+  if(!req.headers['x-auth']){
+    console.log("invalid user")
+    return res.sendStatus(401)
+  }
+  var user = jwt.decode(req.headers['x-auth'],config.secret)
+  Login.findOne({username:user.username}).exec(function(err,user){
+    if(err){
+      console.log(err)
+      return err
+    }
+    if(!user){
+      console.log("user not found")
+      return res.sendStatus(401)
+    }
+    console.log(user.Alert)
+    return res.json(user.Alert)
+})
+
+})
 module.exports = router

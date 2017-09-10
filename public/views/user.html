@@ -1,9 +1,6 @@
-<html>
-  
-  <head>
-    
-  </head>
-  <body> 
-    Welcome to User Page, {{user}} !!
-  </body>
-</html>
+
+      <div class="row" ng-repeat="alert in alerts">
+          <span>{{alert.name}}</span><br/>
+          <span>{{alert.curr_pair}}</span><br/>
+          <span>{{alert.limit}}</span><br/>
+      </div>

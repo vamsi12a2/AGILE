@@ -14,7 +14,11 @@ angular.module("agile").controller("RegisterCntrl",['$scope','$http','Auth','$lo
 								 if(res.data){
 									 $location.path("/user")
 								 }
-							 })
+							 },
+					 		function(res)
+					 		{
+					 			$location.path("/error")
+					 		})
 
 					}
 			},
