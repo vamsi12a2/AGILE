@@ -8,8 +8,11 @@ angular.module("agile").config(
 	.when('/register',{controller:'RegisterCntrl', templateUrl:'register.html'})
 =======
 	.when('/',{controller:'LoginCntrl',templateUrl:'../views/login.html'})
-	.when('/login',{controller:'RegisterCntrl', templateUrl:'/session'})
 	.when('/register',{controller:'RegisterCntrl', templateUrl:'../views/register.html'})
+<<<<<<< HEAD
 >>>>>>> 4e58fd4b351ae212686bd55797c814c6551469ee
+=======
+	.when('/user',{controller:'UserCntrl',templateUrl:'../views/user.html'})
+>>>>>>> 410d6b7f6628e669751e4c44f512aab95a0ab11f
 }
 ])

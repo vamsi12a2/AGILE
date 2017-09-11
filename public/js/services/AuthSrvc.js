@@ -1,17 +1,18 @@
 angular.module("agile").
-service("Auth",['$http',function($http)
+service("Auth",['$http','$rootScope',function($http,$rootScope)
 {
 	 var srv=this;
 	 srv.login = function(username,password)
 	 {
 
-		 $http({
+		 return $http({
 				 url:"/session",
 				 method:"POST",
 				 data: { username:username,password:password}
 		 	}).then(function(res){
 
-					var token = res.data
+					var token = res.data;
+					$rootScope.token = token;
 					return $http({
 						url:"/user",
 						method:"GET",
@@ -25,13 +26,10 @@ service("Auth",['$http',function($http)
 	 }
 	 srv.register = function(username,password)
 	 {
-			$http({
+			return $http({
 			 url:"/user",
 			 method:"POST",
 			 data: {username:username,password:password}
-		 }).then(function(res){
-
-			  srv.login(username,password);
 		 })
 	 }
 	 return srv;

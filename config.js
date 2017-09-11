@@ -13,7 +13,7 @@ module.exports={
 }
 =======
 
-  MONGO_URL : "mongodb://localhost/social",
+  MONGO_URL : "mongodb://127.0.0.1/app",
 
   secret    : "krishna"
 }

@@ -9,7 +9,7 @@ var Alert = db.model('Alert',{
 												type:String,
 												required:true
 										},
-				filter:[
+				filterBy:[
 					{
 						By : {
 										type:String,
@@ -18,7 +18,7 @@ var Alert = db.model('Alert',{
 								 },
 				  	limit : {type:String,required:true}
 					}
-				],			
+				],
 })
 
 module.exports =  Alert
