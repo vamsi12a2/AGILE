@@ -2,56 +2,41 @@ var express = require('express')
 var router = express.Router()
 var bcrypt = require('bcrypt')
 var path = require('path')
+var jwt = require('jwt-simple')
 var Login = require('../models/Login')
+var config = require("../config")
+
 router.get("/", function(req, res, err) {
   console.log("called / using GET")
 
   res.render("index.html")
 });
 
-router.post('/login', function(req, res, err) {
-
-  console.log('login success')
-  res.json("true");
-
-});
-
-
-router.get('/login', function(req, res, err) {
-
-  console.log('login page loaded')
-  res.render("login.html")
-
-});
-
-router.get('/register', function(req, res, err) {
-
-  console.log('register page loaded')
-  res.render("register.html")
-});
-
-router.post('/register', function(req, res, err) {
- console.log("username:"+req.body.username)
- var pass =""
- bcrypt.hash(req.body.password,12,function(err,hash){
+res.get("/user",function(req,res,err){
+  
+  var username = req.body.username
+  Login.findOne({username:username}).select('password').
+  exec(function(err,user){
     if(err){
-      console.log(err)
+      return next(err)
     }
-  console.log("password:"+pass)
-  var user=new Login({username:req.body.username,password:pass})
-  user.save(function(err){
-    console.log("save")
-    if(err){
-       return next(err)
-     }
-  res.json({status:"true",user:user.username})
+    if(!user){
+      res.sendStatus(401);
+    }
+    bcrypt.compare(req.body.password,user.password,function(err,valid){
+      if(err){
+        return next(err)
+      }
+      if(!vaild){
+        return res.sendStatus(401);
+      }
+      var token = jwt.encode({username:username},config.secret)
+      
+    })
   })
-  })
-});
-
-router.get("/user", function(req, res, err) {
-  console.log("called /user using GET")
-  res.render("user.html")
-});
+  res.headers['x-auth'] = token
+  res.json(username)
+  
+})
 
 module.exports = router
