@@ -41,13 +41,13 @@ router.post("/session",function(req,res,err){
         }
         var token = jwt.encode({username:user.username},config.secret)
         console.log("authenication success..")
-        return res.json(token)
+        return res.json({token:token,user:user})
       })
     })
 })
 
 
-
+/*
 router.get('/user',function(req,res,err){
 
   if(!req.headers['x-auth']){
@@ -69,7 +69,7 @@ router.get('/user',function(req,res,err){
     return res.json(user)
   })
 })
-
+*/
 
 router.post('/user',function(req,res,err){
 /*

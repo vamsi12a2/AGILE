@@ -12,15 +12,17 @@ service("Auth",['$http','$rootScope',function($http,$rootScope)
 				 data: { username:username,password:password}
 		 	}).then(function(res){
 
-					var token = res.data;
+					var token = res.data.token;
+			 		console.log("Auth: "+res.data.user)
 					$rootScope.token = token;
-					return $http({
+					/*return $http({
 						url:"/user",
 						method:"GET",
 						headers:{
 							"x-auth":token
 						}
-					})
+					})*/
+			 		return res;
 					
 			})
 
