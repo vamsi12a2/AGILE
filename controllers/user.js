@@ -4,47 +4,17 @@ var bcrypt = require('bcrypt-nodejs')
 var path = require('path')
 var jwt = require('jwt-simple')
 var Login = require('../models/Login')
-<<<<<<< HEAD
 var config = require("../config")
-=======
+
 var config = require('../config')
->>>>>>> 4e58fd4b351ae212686bd55797c814c6551469ee
+
 
 router.get("/", function(req, res, err) {
   console.log("called / using GET")
   return res.render("index.html")
 });
 
-<<<<<<< HEAD
-res.get("/user",function(req,res,err){
-  
-  var username = req.body.username
-  Login.findOne({username:username}).select('password').
-  exec(function(err,user){
-    if(err){
-      return next(err)
-    }
-    if(!user){
-      res.sendStatus(401);
-    }
-    bcrypt.compare(req.body.password,user.password,function(err,valid){
-      if(err){
-        return next(err)
-      }
-      if(!vaild){
-        return res.sendStatus(401);
-      }
-      var token = jwt.encode({username:username},config.secret)
-      
-    })
-  })
-  res.headers['x-auth'] = token
-  res.json(username)
-  
-})
 
-module.exports = router
-=======
 router.post("/session",function(req,res,err){
     console.log("called /session using POST")
     var username = req.body.username
@@ -127,13 +97,15 @@ router.post('/user',function(req,res,err){
 })
 
 
-router.get("/getData",function(req,res,err){
+
+router.post("/addAlert",function(req,res,err){
 
   if(!req.headers['x-auth']){
     console.log("invalid user")
     return res.sendStatus(401)
   }
   var user = jwt.decode(req.headers['x-auth'],config.secret)
+  
   Login.findOne({username:user.username}).exec(function(err,user){
     if(err){
       console.log(err)
@@ -143,10 +115,31 @@ router.get("/getData",function(req,res,err){
       console.log("user not found")
       return res.sendStatus(401)
     }
-    console.log(user.Alert)
-    return res.json(user.Alert)
-})
+    console.log("Body:"+req.body+"Name:"+req.body.name)
+    Login.findByIdAndUpdate(user.id,{$push:{"Alert":{name:req.body.name,curr_pair:req.body.pair,filterBy:{By:req.body.filter,limit:req.body.limit.toString()}}}},
+        {safe: true, upsert: true, new : true},
+        function(err,model) {
+            if(err)
+            {  
+              console.log(err);
+            }
+            console.log(model)
+            return res.json(model)
+        })
+  })
+  
+ 
+ /* Login.findByIdAndUpdate(id,{$push:{"Alert":{name:req.body.name,curr_pair:req.body.pair,filterBy:{By:req.body.filter,limit:req.body.limit}}}},
+        {safe: true, upsert: true, new : true},
+        function(err,model) {
+            if(err)
+            {  
+              console.log(err);
+            }
+            console.log(model)
+            return res.json(model)
+        })*/
 
 })
+
 module.exports = router
->>>>>>> 4e58fd4b351ae212686bd55797c814c6551469ee

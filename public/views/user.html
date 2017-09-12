@@ -1,8 +1,14 @@
 
       <div class="row" ng-repeat="alert in alerts">
-          <span>{{alert.name}}</span><br/>
-          <span>{{alert.curr_pair}}</span><br/>
-          <span>{{alert.limit}}</span><br/>
+        <div class="col  panel panel-primary alertPanel">
+          <div class="panel-heading">
+             <span>{{alert.name}}</span><br/>
+          </div>
+          <div class="panel body">
+            <span>{{alert.curr_pair}}</span><br/>
+            <span>{{alert.filterBy.limit}}</span><br/>
+            </div>
+         </div>
       </div>
 
       <div>

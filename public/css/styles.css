@@ -1,14 +1,3 @@
-.login-tab
-{
-
-}
-.panel
-{
-    margin-left:38%;
-    margin-top:8%;
-    width:25%;
-    height:35%;
-}
 .uname
 {
   margin-top:9%;
@@ -16,4 +5,18 @@
 .btn
 {
   border-radius:0px;  
+}
+.alertPanel
+{
+  width: 80%;
+  height : 100%;
+  margin-left:35px;
+  margin-top :10px;
+}
+.login-tab
+{
+    margin-left:38%;
+    margin-top:8%;
+    width:25%;
+    height:35%;
 }

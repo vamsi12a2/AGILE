@@ -2,6 +2,7 @@ angular.module("agile").
 service("Auth",['$http','$rootScope',function($http,$rootScope)
 {
 	 var srv=this;
+	var alerts= [];
 	 srv.login = function(username,password)
 	 {
 
@@ -20,7 +21,7 @@ service("Auth",['$http','$rootScope',function($http,$rootScope)
 							"x-auth":token
 						}
 					})
-
+					
 			})
 
 	 }

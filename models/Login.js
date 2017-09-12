@@ -9,7 +9,7 @@ var Login =  db.model('Login',{
 															type:String,
 															required:true
 													 },
-										Alert:{
+										Alert:[{
 					 												name : {
 					 																	type:String,
 					 																	required:false
@@ -18,7 +18,7 @@ var Login =  db.model('Login',{
 					 																				type:String,
 					 																				required:false
 					 																		},
-					 												filterBy:[
+					 												filterBy:
 					 													{
 					 														By : {
 					 																		type:String,
@@ -27,9 +27,9 @@ var Login =  db.model('Login',{
 					 																 },
 					 												  	limit : {type:String,required:false}
 					 													}
-					 												],
+					 												,
 																	required:false
-					 								}
+					 								}]
 })
 
 module.exports = Login

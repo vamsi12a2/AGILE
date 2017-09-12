@@ -6,6 +6,8 @@ angular.module("agile").controller("LoginCntrl",['$scope','$http','Auth','$locat
 	Auth.login(username,password).then(function(res){
 				if(res.data)
 				{
+					console.log(res.data.Alert)
+					Auth.alerts = res.data.Alert
 					$location.path("/user")
 				}
 		},
