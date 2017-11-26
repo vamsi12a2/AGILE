@@ -1,8 +1,7 @@
 
       <div class="row" ng-repeat="alert in alerts">
-          <span>{{alert.name}}</span><br/>
-          <span>{{alert.curr_pair}}</span><br/>
-          <span>{{alert.limit}}</span><br/>
+          <span>{{alert.marketName}}</span><br/>
+          <span>{{alert.threshold}}</span><br/>
       </div>
 
       <div>
@@ -14,24 +13,15 @@
                     <h4 class="modal-title">Alert Information</h4>
                   </div>
                   <div class="modal-body">
-                    <form  novalidate method="post" ng-submit="addAlert(alertname,curr_pair,filterBy,limit)">
-                      <div class="form-group"><label>Alert Name</label><input type="text" placeholder="Alert Name..." ng-model="alertname" value="" class="form-control" size="15"></div>
-                      <div class="form-group"><label>Curreny Pair</label><input type="text" placeholder="Pair..." ng-model="curr_pair" value="" class="form-control" size="15"></div>
-                      <div class="form-group"><label>Filter By</label><br/><select class="form-control" ng-model="filterBy">
-                          <option>last</option>
-                          <option>lowestAsk</option>
-                          <option>highestBid</option>
-                          <option>percentChange</option>
-                          <option>baseVolume</option>
-                          <option>quoteVolume</option>
-                          <option>24hrHigh</option>
-                          <option>24hrLow</option>
-                      </select></div>
-                      <div class="form-group"><label>Limit</label><input type="text" placeholder="Limit Value..." ng-model="limit" value="" class="form-control" size="15"></div>
+                    <form  novalidate method="post" ng-submit="addAlert()">
+                      <div class="form-group"><label>Market Name</label><input type="text" placeholder="Pair..." ng-model="curr_pair" value="" class="form-control" size="15"></div>
+                      <div class="form-group"><label>Threshold</label><input type="text" placeholder="Limit Value..." ng-model="limit" value="" class="form-control" size="15"></div>
+                      <div class="form-group"><label>Contact Number</label><input type="text" placeholder="Contact Number..." ng-model="number" value="" class="form-control" size="15"></div>
+
                       <input  type="submit" class="btn btn-primary btn-block" value="Add Alert">
                     </form>
                   </div>
-                  
+
                 </div>
           </div>
       </div>

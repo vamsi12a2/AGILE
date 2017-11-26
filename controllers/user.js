@@ -5,6 +5,7 @@ var path = require('path')
 var jwt = require('jwt-simple')
 var Login = require('../models/Login')
 var config = require('../config')
+var Alert = require('../models/Alert')
 
 router.get("/", function(req, res, err) {
   console.log("called / using GET")
@@ -95,23 +96,34 @@ router.post('/user',function(req,res,err){
 
 router.get("/getData",function(req,res,err){
 
-  if(!req.headers['x-auth']){
-    console.log("invalid user")
-    return res.sendStatus(401)
-  }
-  var user = jwt.decode(req.headers['x-auth'],config.secret)
-  Login.findOne({username:user.username}).exec(function(err,user){
-    if(err){
-      console.log(err)
-      return err
-    }
-    if(!user){
-      console.log("user not found")
-      return res.sendStatus(401)
-    }
-    console.log(user.Alert)
-    return res.json(user.Alert)
+  Alert.find({},function (err, alerts) {
+        if(err)
+        {
+          console.log(err)
+        }
+        return res.json(alerts);
+    })
 })
 
+
+
+
+router.post("/addData",function(req,res,err){
+
+  var alert =new Alert({marketName:req.body.marketName,threshold:req.body.threshold,phoneNumber:req.body.number})
+  alert.save(function(err){
+    console.log(err)
+  })
+  console.log("Alert added..")
+  Alert.find({},function (err, alerts) {
+        if(err)
+        {
+          console.log("err:"+err)
+        }
+        console.log(alerts)
+        return res.json(alerts);
+    })
 })
+
+
 module.exports = router

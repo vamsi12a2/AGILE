@@ -18,16 +18,10 @@ var Login =  db.model('Login',{
 					 																				type:String,
 					 																				required:false
 					 																		},
-					 												filterBy:[
-					 													{
-					 														By : {
-					 																		type:String,
-					 																		required:false,
-					 																		enum:[ 'last', 'lowestAsk', 'highestBid', 'percentChange', 'baseVolume', 'quoteVolume',  '24hrHigh', '24hrLow']
-					 																 },
-					 												  	limit : {type:String,required:false}
-					 													}
-					 												],
+					 												threshold:{
+																		type: String,
+																		required:false
+																	},
 																	required:false
 					 								}
 })
